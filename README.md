@@ -1,4 +1,4 @@
-Very simple example project using webpack and sbolgraph
+Very simple example [sbolgraph](https://github.com/udp/sbolgraph) project for the browser, using webpack
 
 To use, first install [nodejs](https://nodejs.org/en/) which comes with `npm`. Then:
 
