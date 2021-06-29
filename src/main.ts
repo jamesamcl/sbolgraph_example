@@ -1,16 +1,25 @@
 
-import { SBOL2Graph } from 'sbolgraph'
+import { Graph, SBOL2GraphView } from 'sbolgraph'
 
 main()
 
 async function main() {
 
-    let url:string = 'https://synbiohub.org/public/igem/BBa_K104001/1/BBa_K104001.xml'
+    let url:string = 'https://synbiohub.org/public/igem/BBa_K104001/1/sbol'
+
+    let g:Graph = new Graph()
+    let v:SBOL2GraphView = new SBOL2GraphView(g)
+   
 
     console.log('Loading SBOL from ' + url)
-    let g:SBOL2Graph = await SBOL2Graph.loadURL(url)
+
+    let res = await fetch(url)
+    let text = await res.text()
+
+    await v.loadString(text)
+
     
-    for(let cd of g.componentDefinitions) {
+    for(let cd of v.componentDefinitions) {
 
         document.write('There is a ComponentDefinition called ' + cd.displayName + '<br/>')
         document.write('It has ' + cd.sequences.length + ' sequences<br/>')
@@ -19,7 +28,6 @@ async function main() {
             document.write(seq.elements + '<br/>')
         }
     }
-
 
 
 }
